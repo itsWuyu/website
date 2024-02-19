@@ -22,6 +22,12 @@ async function fetchPlayerData() {
     }
 }
 
+async function getMaxEloPlayer(){
+    const playersData = await fetchPlayerData();
+    const playerNames = Object.keys(playersData);
+    const eloValues = playerNames.map(player => playersData[player][0].Elo);
+    maxElo.innerText = playerNames[0];
+}
 // Function to create chart
 async function createChart() {
     const playersData = await fetchPlayerData();
@@ -30,8 +36,8 @@ async function createChart() {
     const playerNames = Object.keys(playersData);
     const eloValues = playerNames.map(player => playersData[player][0].Elo);
     const backgroundColors = playerNames.map(level => getBarColor(playersData[level][0].Level));
-    const maxEloIndex = eloValues.indexOf(Math.max(...eloValues));
     // Chart.js code to plot the data
+   
     const ctx = document.getElementById('eloChart').getContext('2d');
     const eloChart = new Chart(ctx, {
         type: 'bar',
@@ -49,10 +55,12 @@ async function createChart() {
             scales: {
                 y: {
                     ticks: {
+                        
                         fontFamily: 'monospace',
+                        
                     }
                 },
-                x: { // Corrected placement of xAxes configuration
+                x: { 
                     ticks: {
                         fontFamily: 'monospace',
                         fontWeight: 'bold'
@@ -66,3 +74,4 @@ async function createChart() {
 
 // Call function to create chart
 createChart();
+getMaxEloPlayer();
