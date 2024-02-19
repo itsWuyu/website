@@ -26,7 +26,8 @@ async function getMaxEloPlayer(){
     const playersData = await fetchPlayerData();
     const playerNames = Object.keys(playersData);
     const eloValues = playerNames.map(player => playersData[player][0].Elo);
-    maxElo.innerText = playerNames[0];
+    maxEloName.innerText = playerNames[0];
+    maxElo.innerText = eloValues[0];
 }
 // Function to create chart
 async function createChart() {
