@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./icons8-binary-50.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <title>Römmling</title>
+    <style>
+        html, body {
+        font-family: monospace;
+        max-width: 100%;
+        overflow-x: hidden;
+        }
+      
+        </style>
+    <!-- Hier können weitere Meta-Tags, CSS-Links oder Skript-Links hinzugefügt werden -->
+</head>
+<body>
+    <main>
+        <div width="100wh" height="100vh">
+        <canvas id="eloChart" width="100%" height="100%"></canvas> <br>
+        <h3 >Der Spieler mit der höchsten Elo ist <a  id="maxEloName"></a> mit <a id="maxElo"></a></h3>
+        </div>
+    </main>
+</body>
+<script src="js/charts.js"></script>
+</html>
