@@ -58,7 +58,6 @@ async function createChart() {
                     type: 'logarithmic',
                     ticks: {
                         color: "#ffffff",  
-                        fontFamily: 'monospace',   
                     }
                 },
                 x: { 
