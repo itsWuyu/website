@@ -1,6 +1,6 @@
 // Function to fetch JSON data from file
 async function fetchPlayerData() {
-    const response = await fetch('./backend/player.json');
+    const response = await fetch('player.json');
     const data = await response.json();
     return data;
 }
