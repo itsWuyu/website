@@ -55,10 +55,9 @@ async function createChart() {
         options: {
             scales: {
                 y: {
+                    type: 'logarithmic',
                     ticks: {
-                        
-                        fontFamily: 'monospace',
-                        
+                        fontFamily: 'monospace',   
                     }
                 },
                 x: { 
