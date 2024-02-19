@@ -45,11 +45,11 @@ async function createChart() {
         data: {
             labels: playerNames,
             datasets: [{
-                label: 'Elo',
+                label: '',
                 data: eloValues,
                 backgroundColor: backgroundColors,
                 borderColor: backgroundColors.map(color => color.replace('0.2', '1')), // Darker border color
-                borderWidth: 1
+                borderWidth: 1,
             }]
         },
         options: {
@@ -57,14 +57,13 @@ async function createChart() {
                 y: {
                     type: 'logarithmic',
                     ticks: {
+                        color: "#ffffff",  
                         fontFamily: 'monospace',   
                     }
                 },
                 x: { 
                     ticks: {
-                        fontFamily: 'monospace',
-                        fontWeight: 'bold'
-                        
+                        color: "#ffffff",                        
                     }
                 }
             }
