@@ -53,6 +53,12 @@ async function createChart() {
                     ticks: {
                         beginAtZero: true
                     }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontFamily: 'monospace', 
+                        fontWeight: 'bold',
+                    }
                 }]
             }
         }
