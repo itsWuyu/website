@@ -25,8 +25,8 @@ jobs:
           
       - name: execute py elo-grapper # run main.py
         run: python backend/elo-grapper.py
-      - name: execute py monka
-        run: python backend/monka.py
+      - name: execute py playerElo
+        run: python backend/playerElo.py
           
       - name: commit files
         run: |
