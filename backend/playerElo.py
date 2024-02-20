@@ -29,6 +29,8 @@ def extract_player_info(json_data, player_name):
 def getPlayerData(spieler, daten):    
     player_info = extract_player_info(daten, spieler)
     pfad = str('player/'+ spieler +'.txt')
+    if(spieler == "_DyeknoM"):
+        pfad = str('player/monka.txt')
     with open(pfad, 'w') as f:
         f.write(str(player_info))
 
