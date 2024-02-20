@@ -28,7 +28,7 @@ def extract_player_info(json_data, player_name):
 # Convert the JSON string to a Python dictionary
 def getPlayerData(spieler, daten):    
     player_info = extract_player_info(daten, spieler)
-    pfad = str('../player/'+ spieler +'.txt')
+    pfad = str('player/'+ spieler +'.txt')
     with open(pfad, 'w') as f:
         f.write(str(player_info))
 
