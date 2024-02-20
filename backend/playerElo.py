@@ -26,10 +26,14 @@ def extract_player_info(json_data, player_name):
         return f"An error occurred: {e}"
 
 # Convert the JSON string to a Python dictionary
+def getPlayerData(spieler, daten):    
+    player_info = extract_player_info(daten, spieler)
+    pfad = str('../player/'+ spieler +'.txt')
+    with open(pfad, 'w') as f:
+        f.write(str(player_info))
+
 data = get_json_from_url()
 
-# Get info for _DyeknoM
-player_name = "_DyeknoM"
-player_info = extract_player_info(data, player_name)
-with open('monka.txt', 'w') as f:
-    f.write(str(player_info))
+
+getPlayerData("_DyeknoM", data)
+getPlayerData('itsWuyu', data)
