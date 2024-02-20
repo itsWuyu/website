@@ -1,6 +1,12 @@
 import json
 import requests
 
+def remove_special_chars(input_string):
+    special_chars = "_?-,./\|:"
+    for char in special_chars:
+        input_string = input_string.replace(char, "")
+    return input_string
+
 def get_json_from_url():
     try:
         response = requests.get('https://roemmling.it/player.json')
@@ -28,9 +34,9 @@ def extract_player_info(json_data, player_name):
 # Convert the JSON string to a Python dictionary
 def getPlayerData(spieler, daten):    
     player_info = extract_player_info(daten, spieler)
-    pfad = str('player/'+ spieler +'.txt')
-    if(spieler == "_DyeknoM"):
-        pfad = str('player/monka.txt')
+
+    pfad = str('player/'+  remove_special_chars(spieler) +'.txt')
+
     with open(pfad, 'w') as f:
         f.write(str(player_info))
 
