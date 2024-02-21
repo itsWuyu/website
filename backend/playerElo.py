@@ -34,9 +34,7 @@ def extract_player_info(json_data, player_name):
 # Convert the JSON string to a Python dictionary
 def getPlayerData(spieler, daten):    
     player_info = extract_player_info(daten, spieler)
-
     pfad = str('player/'+  remove_special_chars(spieler) +'.txt')
-
     with open(pfad, 'w') as f:
         f.write(str(player_info))
 
@@ -45,3 +43,5 @@ data = get_json_from_url()
 
 getPlayerData("_DyeknoM", data)
 getPlayerData('itsWuyu', data)
+getPlayerData('_Rubyi', data)
+getPlayerData('MRxRED', data)

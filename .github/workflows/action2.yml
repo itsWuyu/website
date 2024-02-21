@@ -1,9 +1,9 @@
-name: run elo-grapper.py
+name: run playerElo.py
 
 on:
   workflow_dispatch :
   schedule:
-    - cron: '0 * * * *' # At 00:00 on Monday
+    - cron: '5,35 * * * *' 
 
 jobs:
   build:
@@ -23,15 +23,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
           
-      - name: execute py elo-grapper # run main.py
-        run: python backend/elo-grapper.py
+      - name: execute py playerElo
+        run: python backend/playerElo.py
           
       - name: commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "updated player-elo for website" --allow-empty)
+          git diff-index --quiet HEAD || (git commit -a -m "updated player-elo for bots" --allow-empty)
           
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
