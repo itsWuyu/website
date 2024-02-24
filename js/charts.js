@@ -29,6 +29,24 @@ async function getMaxEloPlayer(){
     maxEloName.innerText = playerNames[0];
     maxElo.innerText = eloValues[0];
 }
+
+async function generateList(){
+    const data = await fetchPlayerData();
+    const usernames = Object.keys(data);
+    usernames.forEach((username, index) => {
+      const playerData = data[username][0]; // Assuming there's only one object per username
+      const listItem = document.createElement("li");
+      listItem.textContent = `${username}: Elo ${playerData.Elo}, Level ${playerData.Level}`;
+      if (index === 0) {
+        listItem.classList.add("first-item");
+      } else if (index === usernames.length - 1) {
+        listItem.classList.add("last-item");
+      }
+      list.appendChild(listItem);
+    });
+}
+
+
 // Function to create chart
 async function createChart() {
     const playersData = await fetchPlayerData();
@@ -53,6 +71,8 @@ async function createChart() {
             }]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 y: {
                     type: 'logarithmic',
@@ -70,21 +90,9 @@ async function createChart() {
     });
 }
 
-async function getMonkaElo(){
-    const playersData = await fetchPlayerData();
-    const playerNames = Object.keys(playersData);
-    const eloValues = playerNames.map(player => playersData[player][0].Elo);
-
-    const index = playerNames.findIndex(name => name === "_DyeknoM");
-    if (index !== -1) {
-        monkaEloElo.innerText = eloValues[index];
-    } else {
-        console.log("Player '_DyeknoM' not found.");
-    }
-}
 
 
 // Call function to create chart
 createChart();
 getMaxEloPlayer();
-getMonkaElo();
+generateList()
