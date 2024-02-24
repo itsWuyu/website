@@ -14,7 +14,26 @@
         background-color: #161616;
         padding: 10px;
         }
-      
+        #list{
+            padding-top: 50px;
+            color: white;
+            font-size: 1.17rem;
+            list-style-type: decimal;
+        }
+        .first-item {
+        color: green;
+        }
+        .first-item::after{
+            content: '🏆';
+        }
+
+        .last-item {
+        color: red;
+        }
+        .last-item::after{
+            content: '🤡';
+        }
+    
         </style>
     <!-- Hier können weitere Meta-Tags, CSS-Links oder Skript-Links hinzugefügt werden -->
 </head>
@@ -23,7 +42,10 @@
         <div style="max-height: 90vh;">
         <canvas height="100%" id="eloChart"></canvas> <br>
         <h3 style="color: #fff;">Der Spieler mit der höchsten Elo ist <a  id="maxEloName"></a> mit <a id="maxElo"></a></h3>
-
+        </div>
+        <div style="max-height: 100vh; width: auto;">
+            <br>
+            <ul id="list"></ul>
         </div>
     </main>
 </body>
