@@ -33,7 +33,7 @@ def grabscher(name):
     return elo
 
 
-Username = {"itsWuyu", "_Rubyi", "-ProToX", "_DyeknoM", 's1mpMeister', 'rabemd', 'MRxRED', 'Deu7', 'DannyDE', 'MadMat', 'ToggleToni', 'TstsLikeMeat',  'sefer1999', 'rayz', 'ron1N', 'rakoN', '-TobseN-'}
+Username = {"itsWuyu", "_Rubyi", "-ProToX", "_DyeknoM", 's1mpMeister', 'rabemd', 'MRxRED', 'Deu7', 'DannyDE', 'MadMat', 'ToggleToni', 'TstsLikeMeat',  'sefer1999', 'rayz', 'ron1N', 'rakoN', '-TobseN-', 'xRoxxon'}
 #Username = {"itsWuyu", "_Rubyi"}
 player = {}
 for user in Username:
