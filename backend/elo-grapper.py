@@ -47,10 +47,11 @@ try:
         elo = grabscher(user)
         if elo != -1:
             player[user] = [{"Elo": elo , "Level":levelChecker(elo)}]
-    player = dict(sorted(player.items(), key=lambda item: item[1][0]["Elo"], reverse=True))
-
-    with open('player.json', 'w') as fp:
-        # Dump the sorted dictionary to the file
-        json.dump(player, fp)
+   
+    if player:
+        player = dict(sorted(player.items(), key=lambda item: item[1][0]["Elo"], reverse=True))
+        with open('player.json', 'w') as fp:
+            # Dump the sorted dictionary to the file
+            json.dump(player, fp)
 except Exception as e:
     print(e)
