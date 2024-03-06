@@ -29,20 +29,28 @@ def levelChecker(elo):
 
 def grabscher(name):
     r = requests.get("https://faceitanalyser.com/stats/" + name + "/cs2")
-    elo = int((BeautifulSoup(r.content, "html.parser").find(class_="stats_profile_elo_span").get_text()).replace(" ELO", ''))
+    elo = BeautifulSoup(r.content, "html.parser").find(class_="stats_profile_elo_span")
+    if elo is not None:
+        elo = int(elo.get_text().replace(" ELO", ''))
+    else:
+        elo = -1
+    
+    print(str(name) + ' : ' + str(elo))
     return elo
 
 
 Username = {"itsWuyu", "_Rubyi", "-ProToX", "_DyeknoM", 's1mpMeister', 'rabemd', 'MRxRED', 'Deu7', 'DannyDE', 'MadMat', 'ToggleToni', 'TstsLikeMeat',  'sefer1999', 'rayz', 'ron1N', 'rakoN', '-TobseN-', 'xRoxxon'}
 #Username = {"itsWuyu", "_Rubyi"}
-player = {}
-for user in Username:
-    elo = grabscher(user)
-    player[user] = [{"Elo": elo , "Level":levelChecker(elo)}]
-    time.sleep(1)
+try:
+    player = {}
+    for user in Username:
+        elo = grabscher(user)
+        if elo != -1:
+            player[user] = [{"Elo": elo , "Level":levelChecker(elo)}]
+    player = dict(sorted(player.items(), key=lambda item: item[1][0]["Elo"], reverse=True))
 
-player = dict(sorted(player.items(), key=lambda item: item[1][0]["Elo"], reverse=True))
-
-with open('player.json', 'w') as fp:
-    # Dump the sorted dictionary to the file
-    json.dump(player, fp)
+    with open('player.json', 'w') as fp:
+        # Dump the sorted dictionary to the file
+        json.dump(player, fp)
+except Exception as e:
+    print(e)
