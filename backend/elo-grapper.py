@@ -30,15 +30,13 @@ def levelChecker(elo):
 
 def grabscher(name):
     try:
-        API_KEY = os.getenv["API_KEY"]
+        API_KEY = os.environ["API_KEY"]
     except KeyError:
         API_KEY = "API Key nicht erreichbar"
-    url = "https://faceitanalyser.com/api/names/" + name + "?key=" + API_KEY
-    print(url)
-    r = requests.get(url)
-    print(r)
-    if r is not None:
-        elo = int(r['segments'][0]['current_elo'])
+    r = requests.get("https://faceitanalyser.com/api/names/" + name + "?key=" + API_KEY)
+    data = r.json()
+    if data is not None:
+        elo = int(data['segments'][0]['current_elo'])
     else:
         elo = -1
     
@@ -46,8 +44,8 @@ def grabscher(name):
     return elo
 
 
-#Username = {"itsWuyu", "_Rubyi", "-ProToX", "_DyeknoM", 's1mpMeister', 'rabemd', 'MRxRED', 'Deu7', 'DannyDE', 'MadMat', 'ToggleToni', 'TstsLikeMeat',  'sefer1999', 'rayz', 'ron1N', 'rakoN', '-TobseN-', 'xRoxxon', 'pr0mise'}
-Username = {"itsWuyu", "_Rubyi"}
+Username = {"itsWuyu", "_Rubyi", "-ProToX", "_DyeknoM", 's1mpMeister', 'rabemd', 'MRxRED', 'Deu7', 'DannyDE', 'MadMat', 'ToggleToni', 'TstsLikeMeat',  'sefer1999', 'rayz', 'ron1N', 'rakoN', '-TobseN-', 'xRoxxon', 'pr0mise'}
+#Username = {"itsWuyu", "_Rubyi"}
 try:
     player = {}
     for user in Username:
@@ -55,7 +53,7 @@ try:
         if elo != -1:
             player[user] = [{"Elo": elo , "Level":levelChecker(elo)}]
    
-    if player == 'TOBSEN':
+    if player:
         player = dict(sorted(player.items(), key=lambda item: item[1][0]["Elo"], reverse=True))
         with open('player.json', 'w') as fp:
             # Dump the sorted dictionary to the file
