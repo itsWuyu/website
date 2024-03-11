@@ -75,6 +75,8 @@ async function createChart() {
             maintainAspectRatio: false,
             scales: {
                 y: {
+                    min: eloValues[eloValues.length - 1] - 30,
+                    max: eloValues[0],
                     type: 'logarithmic',
                     ticks: {
                         color: "#ffffff",  
