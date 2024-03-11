@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import time
+import os
 
 
 def levelChecker(elo):
@@ -28,10 +29,14 @@ def levelChecker(elo):
         
 
 def grabscher(name):
-    r = requests.get("https://faceitanalyser.com/stats/" + name + "/cs2")
-    elo = BeautifulSoup(r.content, "html.parser").find(class_="stats_profile_elo_span")
-    if elo is not None:
-        elo = int(elo.get_text().replace(" ELO", ''))
+    try:
+        API_KEY = os.environ["API_KEY"]
+    except KeyError:
+        API_KEY = "API Key nicht erreichbar"
+    r = requests.get("https://faceitanalyser.com/api/names/" + name + "?key=" + API_KEY)
+    data = r.json()
+    if data is not None:
+        elo = int(data['segments'][0]['current_elo'])
     else:
         elo = -1
     
