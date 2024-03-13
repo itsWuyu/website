@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import time
 import os
+from datetime import datetime, timedelta
 
 
 def levelChecker(elo):
@@ -36,7 +37,13 @@ def grabscher(name):
     r = requests.get("https://faceitanalyser.com/api/names/" + name + "?key=" + API_KEY)
     data = r.json()
     if data is not None:
-        elo = int(data['segments'][0]['current_elo'])
+        last_occurrence_str = data["segments"][0]["last_occurrence"]
+        last_occurrence_date = datetime.strptime(last_occurrence_str, "%Y-%m-%d")
+        days_difference = (datetime.now() - last_occurrence_date).days
+        if days_difference <= 30:
+            elo = int(data['segments'][0]['current_elo'])
+        else:
+            elo = -1
     else:
         elo = -1
     
