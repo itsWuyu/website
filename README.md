@@ -22,8 +22,9 @@ Dies ist eine einfache Website, die es dir ermöglicht, die Elo-Werte von versch
 ## Technologien
 
 - 🌐 HTML, CSS und JavaScript für die Frontend-Entwicklung.
-- 🚀 [Faceit API](https://faceitanalyser.com/api/) für die Abfrage von Elo-Werten.
+- 🚀 [Faceit Analyser API](https://docs.faceitanalyser.com/) für die Abfrage von Elo-Werten.
 - 🛠️ GitHub Pages für das Hosting der Website.
+- 🏃‍♂️ GitHub Actions für das Back End 
 
 ## Beitrag
 
