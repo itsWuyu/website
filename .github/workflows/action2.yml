@@ -2,8 +2,6 @@ name: run playerElo.py
 
 on:
   workflow_dispatch :
-  schedule:
-    - cron: '5,35 * * * *' 
 
 jobs:
   build:
