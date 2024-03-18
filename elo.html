@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./icons8-binary-50.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
     
     <title>Saver Abi Elo Viewer | Römmling</title>
     <style>
@@ -13,12 +14,16 @@
         max-width: 100%;
         background-color: #161616;
         padding: 10px;
+        color: #fff;
         }
         #list{
-            padding-top: 50px;
             color: white;
             font-size: 1.17rem;
             list-style-type: decimal;
+        }
+        #player-list{
+            list-style-type: katakana;
+            font-size: 1.17rem;
         }
         .first-item {
         color: green;
@@ -33,21 +38,110 @@
         .last-item::after{
             content: '🤡';
         }
-    
+        button {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            background-color: transparent;
+            border: 2px solid rgba(227, 35, 17, 0.8);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: rgba(227, 35, 17, 0.8);
+        }
+
+        /* Button container */
+        #buttons {
+            margin-top: 5px;
+            text-align: right;
+        }
+        label {
+        display: block; /* Ensures label is displayed on a new line */
+        margin-bottom: 5px; /* Adds some space between label and select element */
+        font-weight: bold; /* Makes the label text bold */
+        }
+
+    /* Style for the select element */
+    #prey-select {
+        width: auto; /* Adjust the width as needed */
+        padding: 4px; /* Adds padding inside the select box */
+        font-size: 14px; /* Sets the font size */
+        border: 1px solid #ccc; /* Adds a border */
+        background-color: #161616;
+        color: white;
+        border-radius: 1px; /* Rounds the corners of the select box */
+    }
+
+    /* Style for select element when focused */
+    #prey-select:focus {
+        outline: none; /* Removes the default focus outline */
+        border-color:rgba(227, 35, 17, 0.8); /* Changes the border color when the select element is focused */
+    }
+    #prey-select option {
+    padding: 1px; /* Adds padding to the options */
+    font-size: 16px; /* Sets the font size of the options */
+    }
+
+    /* Style for the selected option */
+    #prey-select option:checked {
+        background-color:rgba(227, 35, 17, 0.8); /* Changes the background color of the selected option */
+    }
+    .container {
+    max-height: 100vh;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    }
+    @media (max-width: 767px) {
+    .container {
+        flex-direction: column; /* Stack the divs vertically */
+        align-items: center; /* Center align the divs */
+    }
+}
+
         </style>
     <!-- Hier können weitere Meta-Tags, CSS-Links oder Skript-Links hinzugefügt werden -->
 </head>
 <body>
     <main>
         <div style="max-height: 90vh;">
+            <div id="buttons">
+                <button onclick="showAllPlayers()">Alle Spieler Anzeigen</button>
+                <button onclick="showLevel10Players()">Nur Level 10 Spieler</button>
+            </div>
         <canvas height="100%" id="eloChart"></canvas> <br>
-        <h3 style="color: #fff;">Der Spieler mit der höchsten Elo ist <a  id="maxEloName"></a> mit <a id="maxElo"></a></h3>
+        
         </div>
-        <div style="max-height: 100vh; width: auto;">
-            <br>
+      
+        <div style="margin-top: 5%; padding: 15px;">
+            <h3 style="color: #fff;">Der Spieler mit der höchsten Elo ist <a  id="maxEloName"></a> mit <a id="maxElo"></a></h3><br>
+        </div>
+        <div class='container'>
+      
+        <div style="padding: 15px;">
+            <h2>Spieler Liste</h2>
             <ul id="list"></ul>
         </div>
+            <div style="padding: 15px;">
+                <h2>Jäger und Gejagter</h2>
+                <label for="prey-select">Wähle den Gejagten:</label>
+                <select id="prey-select">  <!-- Optionen für die Auswahl des Gejagten werden dynamisch generiert -->  </select>
+                <button onclick="generateHunterAndPreyList()">Jagen</button>
+                <ul id="player-list"></ul>
+            </div>
+   
+    </div>
     </main>
 </body>
 <script src="js/charts.js"></script>
+
+
 </html>
